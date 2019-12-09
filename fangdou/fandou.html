@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>函数防抖</title>
+    <style>
+        body{
+            height: 2000px;
+        }
+        #btn{
+            position: absolute;
+            left: 200px;
+        }
+    </style>
+</head>
+<body>
+    <button id="btn">加载更多</button>
+</body>
+<script>
+    // 函数节流：第一次发送请求后，只要相应没回来，
+    //          就不能发送第二个请求。
+    var canClick = true;
+    btn.onclick=function(){
+        if(canClick){
+            canClick=false;
+            console.log("请求AJAX，加载更多...");
+            setTimeout(function(){
+                console.log("加载完成");
+                canClick = true
+
+            },3000)
+        }
+
+    }
+    // 函数防抖:只要不是最后一次触发，就不执行异步请求。
+    var timer;
+    window.onscroll=function(){
+        if(timer!==undefined){
+            clearTimeout(timer);
+        }
+            timer=setTimeout(function(){
+                console.log("请求AJAX，加载更多...");
+            },200)
+    }
+</script>
+</html>
